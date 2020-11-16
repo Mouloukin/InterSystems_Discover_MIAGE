@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+    
+        "Dockerfile*": "dockerfile",
+      },
+    "objectscript.conn" :{
+      "ns": "Commande",
+      "active": true,
+      "docker-compose": {
+        "service": "iris",
+        "internalPort": 52773
+      },
+      "links": {
+        "CRUD REST spec": "http://localhost:${port}/crud/_spec"
+      },
+      "server": "default~iris"
+    }
+    
+    
+  
+
+}

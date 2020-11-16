@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "Reservation"
+		},
+		{
+			"path": "Commande"
+		}
+	],
+	"settings": {
+		"objectscript.conn.active": false
+	}
+}
