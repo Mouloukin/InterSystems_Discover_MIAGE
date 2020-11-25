@@ -17,8 +17,8 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <parameter name='MAXLEN'  value='50' />
 </parameters>
 </property>
-<property name='voitureCatalogue' type='data.Catalogue' instantiate='0' />
-<property name='voiture' type='data.Voiture' instantiate='0' />
+<property name='voitureCatalogue' type='webObjet.wsCatalogue' instantiate='0' />
+<property name='voiture' type='webObjet.wsVoiture' instantiate='0' />
 </context>
 <sequence xend='200' yend='1000' >
 <call name='Vérifier Catalogue' target='Catalogue' async='0' xpos='200' ypos='250' >
@@ -33,7 +33,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </call>
 <if name='Dans la catalogue ?' condition='context.inCatalogue="OK"' xpos='200' ypos='350' xend='200' yend='900' >
 <true>
-<transform name='Catalogue to Voiture' class='Transform.CatalogueToVoiture' source='context.voitureCatalogue' target='context.voiture' xpos='470' ypos='500' />
+<transform name='Catalogue to Voiture' class='Transform.WsCatalogueToWsVoiture' source='context.voitureCatalogue' target='context.voiture' xpos='470' ypos='500' />
 <call name='Générer Plaque' target='Plaque' async='0' xpos='470' ypos='600' >
 <request type='msg.generationPlaqueDmde' />
 <response type='msg.generationPlaqueRpse' >
@@ -42,15 +42,17 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </call>
 <call name='Ajouter voiture' target='Voiture' async='0' xpos='470' ypos='700' >
 <request type='msg.creerVoitureDmde' >
+<assign property="callrequest.voiture" value="context.voiture" action="set" />
 <assign property="callrequest.voiture.plaque" value="context.plaque" action="set" />
 <assign property="callrequest.voiture.couleur" value="request.couleur" action="set" />
-<assign property="callrequest" value="context.voiture" action="set" />
 </request>
 <response type='msg.creerVoitureRpse' />
 </call>
 <call name='Fiche voiture' target='VoitureFile' async='0' xpos='470' ypos='800' >
 <request type='msg.pushVoitureFileDmde' >
-<assign property="callrequest" value="context.voiture" action="set" />
+<assign property="callrequest.voiture" value="context.voiture" action="set" />
+<assign property="callrequest.voiture.plaque" value="context.plaque" action="set" />
+<assign property="callrequest.voiture.couleur" value="request.couleur" action="set" />
 </request>
 <response type='msg.pushVoitureFileRpse' />
 </call>
