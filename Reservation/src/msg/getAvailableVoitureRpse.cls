@@ -1,14 +1,14 @@
 Class msg.getAvailableVoitureRpse Extends msg.basic.reponse
 {
 
-Property plaque As %String;
+Property voiture As webObjet.wsVoiture;
 
 Storage Default
 {
 <Data name="getAvailableVoitureRpseDefaultData">
 <Subscript>"getAvailableVoitureRpse"</Subscript>
 <Value name="1">
-<Value>plaque</Value>
+<Value>voiture</Value>
 </Value>
 </Data>
 <DefaultData>getAvailableVoitureRpseDefaultData</DefaultData>
