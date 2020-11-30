@@ -60,13 +60,13 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="response.libErreur" value="callresponse.libErreur" action="set" />
 </response>
 </call>
-<call name='Fiche voiture' target='VoitureFile' async='0' xpos='470' ypos='800' >
-<request type='msg.pushVoitureFileDmde' >
-<assign property="callrequest.voiture" value="context.voiture" action="set" />
-<assign property="callrequest.voiture.plaque" value="context.plaque" action="set" />
-<assign property="callrequest.voiture.couleur" value="request.couleur" action="set" />
+<call name='Créer voiture réservation' target='Reservation' async='1' xpos='470' ypos='800' >
+<request type='msg.creerReservationDmde' >
+<assign property="callrequest.nom" value="context.voiture.marque_&quot; &quot;_context.voiture.modele" action="set" />
+<assign property="callrequest.plaque" value="context.plaque" action="set" />
+<assign property="callrequest.categorie" value="context.voiture.categorie" action="set" />
 </request>
-<response type='msg.pushVoitureFileRpse' >
+<response type='msg.creerReservationRpse' >
 <assign property="response.codeRetour" value="callresponse.codeRetour" action="set" />
 <assign property="response.libErreur" value="callresponse.libErreur" action="set" />
 </response>

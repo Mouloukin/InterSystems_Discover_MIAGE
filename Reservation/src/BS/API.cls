@@ -15,7 +15,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <!-- Créer une réservation-->
 <Route Url="/create/" Method="POST" Call="CreerReservation"/>
 <!-- Créer une réservation-->
-<Route Url="/delete/:plaque" Method="DELETE" Call="SupprimerVoiture"/>
+<Route Url="/delete/" Method="POST" Call="SupprimerVoiture"/>
 </Routes>
 }
 
@@ -73,11 +73,13 @@ ClassMethod CreerReservation() As %Status
     Quit tSC
 }
 
-ClassMethod SupprimerVoiture(pPlaque As %String) As %Status
+ClassMethod SupprimerVoiture() As %Status
 {
     #dim tSC As %Status = $$$OK
     Set msg = ##class(msg.sortirVoitureParcDmde).%New()
-    set msg.plaque = pPlaque
+    
+    Set data=%request.Content
+    do msg.%JSONImport(data)
 
     set tSC = ##class(Ens.Director).CreateBusinessService("ServiceVoiture",.tService) if $$$ISERR(tSC) quit 
     set tSC = tService.ProcessInput(msg,.response,"suppVoiture")
