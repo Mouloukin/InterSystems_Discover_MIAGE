@@ -17,7 +17,7 @@ Method creerVoitureReservation(pRequest As msg.creerReservationDmde, Output pRes
 
     set tsc = ..Adapter.SendFormDataArray(.httpResponse, "POST", httpRequest)
 
-    set pResponse.codeRetour = "OK"
+    do ..JSONStreamToObject(httpResponse.Data,.pResponse,"msg.creerReservationRpse",1)
 
     Quit $$$OK
 }
