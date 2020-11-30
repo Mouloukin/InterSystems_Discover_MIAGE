@@ -1,4 +1,4 @@
-Class msg.commanderVoitureDmde Extends Ens.Request
+Class msg.commanderVoitureDmde Extends (Ens.Request, %JSON.Adaptor)
 {
 
 Property marque As %String;
