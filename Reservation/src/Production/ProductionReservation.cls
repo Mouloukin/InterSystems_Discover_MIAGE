@@ -22,6 +22,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="CreerReservation" Category="" ClassName="BP.CreerReservation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="ServiceReservation" Category="" ClassName="BS.ServiceReservation" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 

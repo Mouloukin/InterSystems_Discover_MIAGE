@@ -42,13 +42,13 @@ Method creerReservation(pRequest As msg.creerReservationDmde, Output pResponse A
 {
     set pResponse = ##class(msg.getAvailableVoitureRpse).%New()
     set reservation = ##class(data.Reservation).%New()
-    set voiture = ##class(data.Voiture).%New()
-    do ##class(Transform.WsVoitureToVoiture).Transform(pRequest.voiture,.voiture)
-    set reservation.voiture = voiture
+    //do ##class(Transform.WsVoitureToVoiture).Transform(pRequest.voiture,.voiture)
+    do ##class(data.Voiture).consulterParPlaqueExists(pRequest.voiture.plaque, .id)
+    set reservation.voiture = ##class(data.Voiture).%OpenId(id)
     set reservation.startDate = pRequest.startDate
     set reservation.endDate = pRequest.endDate
 
-    set tsc = reservation.%Save()
+    set tsc = reservation.%Save(0)
 
     set pResponse.codeRetour = "OK"
 

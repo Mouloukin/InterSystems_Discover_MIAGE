@@ -7,6 +7,8 @@ Property categorie As %String(VALUELIST = "'2 places', 'Cabriolet', 'Berline', '
 
 Property plaque As %String(MAXLEN = 9, MINLEN = 9);
 
+Index consulterParPlaque On plaque;
+
 Storage Default
 {
 <Data name="VoitureDefaultData">
