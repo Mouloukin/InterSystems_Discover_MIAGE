@@ -15,7 +15,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <!-- Commander une voiture -->
 <Route Url="/voiture/" Method="POST" Call="CommanderVoiture"/>
 <!-- Commander une voiture -->
-<Route Url="/voiture/sortirParc/:plaque" Method="DELETE" Call="SortirVoitureParc"/>
+<Route Url="/voiture/sortirParc/" Method="POST" Call="SortirVoitureParc"/>
 </Routes>
 }
 
@@ -76,15 +76,14 @@ ClassMethod CommanderVoiture() As %Status
     Quit tSC
 }
 
-ClassMethod SortirVoitureParc(pPlaque As %String) As %Status
+ClassMethod SortirVoitureParc() As %Status
 {
     #dim tSC As %Status = $$$OK
     Set msg = ##class(msg.sortirVoitureParcCommandeDmde).%New()
-    set msg.plaque = pPlaque
 
     //On récupére les données de la requête
-    //Set data=%request.Content
-    //do msg.%JSONImport(data)
+    Set data=%request.Content
+    do msg.%JSONImport(data)
     //$$$TOE(tSC,msg.%JSONImport(data))
 
 

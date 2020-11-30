@@ -1,4 +1,4 @@
-Class msg.sortirVoitureParcCommandeDmde Extends Ens.Request
+Class msg.sortirVoitureParcCommandeDmde Extends (Ens.Request, %JSON.Adaptor)
 {
 
 Property plaque As %String;
