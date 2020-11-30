@@ -24,6 +24,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="ServiceReservation" Category="" ClassName="BS.ServiceReservation" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
+  <Item Name="SortirVoitureParc" Category="" ClassName="BP.SortirVoitureParc" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 

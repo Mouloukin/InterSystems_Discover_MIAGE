@@ -55,6 +55,37 @@ Method creerReservation(pRequest As msg.creerReservationDmde, Output pResponse A
     Quit $$$OK
 }
 
+Method haveFutureReservation(pRequest As msg.haveFutureReservationDmde, Output pResponse As msg.haveFutureReservationRpse) As %Status
+{
+    set pResponse = ##class(msg.haveFutureReservationRpse).%New()
+    set sql = "select count(*) as nbResa from data.Reservation where voiture->plaque = '"_pRequest.plaque_"' "
+    set sql = sql_"and endDate>NOW()"
+
+    set statement=##class(%SQL.Statement).%New() 
+	do statement.%Prepare(sql)
+	set SQLrequest = statement.%Execute()
+    do SQLrequest.%Next()
+    set pResponse.nbResa = SQLrequest.%Get("nbResa")
+
+    set pResponse.codeRetour = "OK"
+
+    Quit $$$OK
+}
+
+Method suppReservation(pRequest As msg.suppReservationByPlaqueDmde, Output pResponse As msg.suppReservationByPlaqueRpse) As %Status
+{
+    set pResponse = ##class(msg.suppReservationByPlaqueRpse).%New()
+    set sql = "delete from data.Reservation where voiture->plaque = '"_pRequest.plaque_"'"
+
+    set statement=##class(%SQL.Statement).%New() 
+	do statement.%Prepare(sql)
+	set SQLrequest = statement.%Execute()
+
+    set pResponse.codeRetour = "OK"
+
+    Quit $$$OK
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -63,6 +94,12 @@ XData MessageMap
     </MapItem>
     <MapItem MessageType="msg.creerReservationDmde">
         <Method>creerReservation</Method>
+    </MapItem>
+    <MapItem MessageType="msg.haveFutureReservationDmde">
+        <Method>haveFutureReservation</Method>
+    </MapItem>
+    <MapItem MessageType="msg.suppReservationByPlaqueDmde">
+        <Method>suppReservation</Method>
     </MapItem>
 </MapItems>
 }
