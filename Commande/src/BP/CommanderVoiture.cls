@@ -2,6 +2,11 @@
 Class BP.CommanderVoiture Extends Ens.BusinessProcessBPL
 {
 
+Storage Default
+{
+<Type>%Storage.Persistent</Type>
+}
+
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
@@ -29,6 +34,8 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <response type='msg.consulterVoitureCatalogueRpse' >
 <assign property="context.inCatalogue" value="callresponse.codeRetour" action="set" />
 <assign property="context.voitureCatalogue" value="callresponse.voiture" action="set" />
+<assign property="response.codeRetour" value="callresponse.codeRetour" action="set" />
+<assign property="response.libErreur" value="callresponse.libErreur" action="set" />
 </response>
 </call>
 <if name='Dans la catalogue ?' condition='context.inCatalogue="OK"' xpos='200' ypos='350' xend='200' yend='900' >
@@ -38,6 +45,8 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <request type='msg.generationPlaqueDmde' />
 <response type='msg.generationPlaqueRpse' >
 <assign property="context.plaque" value="callresponse.plaque" action="set" />
+<assign property="response.libErreur" value="callresponse.libErreur" action="set" />
+<assign property="response.codeRetour" value="callresponse.codeRetour" action="set" />
 </response>
 </call>
 <call name='Ajouter voiture' target='Voiture' async='0' xpos='470' ypos='700' >
@@ -46,7 +55,10 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="callrequest.voiture.plaque" value="context.plaque" action="set" />
 <assign property="callrequest.voiture.couleur" value="request.couleur" action="set" />
 </request>
-<response type='msg.creerVoitureRpse' />
+<response type='msg.creerVoitureRpse' >
+<assign property="response.codeRetour" value="callresponse.codeRetour" action="set" />
+<assign property="response.libErreur" value="callresponse.libErreur" action="set" />
+</response>
 </call>
 <call name='Fiche voiture' target='VoitureFile' async='0' xpos='470' ypos='800' >
 <request type='msg.pushVoitureFileDmde' >
@@ -54,7 +66,10 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="callrequest.voiture.plaque" value="context.plaque" action="set" />
 <assign property="callrequest.voiture.couleur" value="request.couleur" action="set" />
 </request>
-<response type='msg.pushVoitureFileRpse' />
+<response type='msg.pushVoitureFileRpse' >
+<assign property="response.codeRetour" value="callresponse.codeRetour" action="set" />
+<assign property="response.libErreur" value="callresponse.libErreur" action="set" />
+</response>
 </call>
 </true>
 <false>
@@ -63,11 +78,6 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </if>
 </sequence>
 </process>
-}
-
-Storage Default
-{
-<Type>%Storage.Persistent</Type>
 }
 
 }
